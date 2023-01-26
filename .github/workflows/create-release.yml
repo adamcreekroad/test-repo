@@ -12,26 +12,28 @@ jobs:
    runs-on: ubuntu-latest
 
    steps:
-    - name: checkout
+    - name: Checkout
       uses: actions/checkout@v2
-
     - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
+      id: create-release
+      uses: softprops/action-gh-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: ${{ github.ref }}
         generate_release_notes: true
-    - name: Send GitHub Action trigger data to Slack workflow
-      id: slack
+    - name: Get Release
+      id: get-release
+      uses: bruceadams/get-release@v1.3.2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Send Slack Message
+      id: send-slack-message
       uses: slackapi/slack-github-action@v1.23.0
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       with:
         payload: |
           {
-            "release_name": "${{ github.event.release.release.name }}",
-            "release_notes": "${{ github.event.release.release.body }}"
+            "release_name": "${{ steps.get-release.outputs.name }}",
+            "release_notes": "${{ steps.get-release.outputs.body }}"
           }
