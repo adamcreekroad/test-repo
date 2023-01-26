@@ -32,6 +32,6 @@ jobs:
       with:
         payload: |
           {
-            "release_name": "${{ events.release.release.name }}",
-            "release_notes": "${{ events.release.release.body }}"
+            "release_name": "${{ github.event.release.release.name }}",
+            "release_notes": "${{ github.event.release.release.body }}"
           }
