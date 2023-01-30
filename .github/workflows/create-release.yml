@@ -34,6 +34,7 @@ jobs:
       with:
         payload: |
           {
+            "repo_name": "${{ github.repository }}",
             "release_name": "${{ steps.get-release.outputs.name }}",
             "release_notes": "${{ steps.get-release.outputs.body }}"
           }
