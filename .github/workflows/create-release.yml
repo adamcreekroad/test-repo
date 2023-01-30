@@ -41,5 +41,5 @@ jobs:
           {
             "repo_name": "${{ github.repository }}",
             "release_name": "${{ steps.get-release.outputs.name }}",
-            "release_notes": "${{ steps.convert-markdown.outputs.text }}"
+            "release_notes": ${{ steps.convert-markdown.outputs.text }}
           }
