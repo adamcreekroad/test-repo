@@ -39,7 +39,7 @@ jobs:
       with:
         payload: |
           {
-            "repo_name": ${{ github.repository }},
-            "release_name": ${{ steps.get-release.outputs.name }},
+            "repo_name": ${{ toJSON(github.repository) }},
+            "release_name": ${{ toJSON(steps.get-release.outputs.name) }},
             "release_notes": ${{ toJSON(steps.convert-markdown.outputs.text) }}
           }
