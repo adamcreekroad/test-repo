@@ -9,10 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set Git config
-        run: |
-          git config --local user.email "adamgeorge@getshogun.com"
-          git config --local user.name "Adam"
       - name: Backport main to develop
         run: |
           git fetch --unshallow
