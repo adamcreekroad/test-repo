@@ -3,3 +3,5 @@ bar
 BAR
 
 BAZ
+
+BAZ
